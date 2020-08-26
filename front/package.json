@@ -1,0 +1,16 @@
+{
+  "name": "chatbot",
+  "version": "1.0.0",
+  "description": "chating bot and person ",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "kshitij sharma",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^9.5.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
