@@ -7,6 +7,10 @@ import { encode } from '../middlewares/jwt.js';
 const router = express.Router();
 
 router
+  .get('/', (req, res) => {
+    res.status = 200;
+    res.send('Hello user.');
+  })
   .post('/login/:userId', encode, (req, res, next) => { });
 
 export default router;
