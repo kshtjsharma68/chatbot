@@ -1,5 +1,5 @@
-import mongoose from "mongoose"
-import config from './index.js'
+var mongoose = require("mongoose")
+var config = require('./index.js')
 
 const CONNECTION_URL = `mongodb://${config.db.url}/${config.db.name}`
 

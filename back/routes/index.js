@@ -1,16 +1,21 @@
-import express from 'express';
+var express = require('express')
 // controllers
-import users from '../controllers/user.js';
+var users = require('../controllers/user.js');
 // middlewares
-import { encode } from '../middlewares/jwt.js';
+var { encode } =  require('../middlewares/jwt.js');
 
 const router = express.Router();
 
 router
-  .get('/', (req, res) => {
-    res.status = 200;
-    res.send('Hello user.');
-  })
+  .get('/', users.onGetAllUsers)
+router
+  .post('/login', users.loginUser)
+router  
+  .post('/register', users.onCreateUser)
+router
   .post('/login/:userId', encode, (req, res, next) => { });
+// router
+//   .get('/logout', )
 
-export default router;
+// export default router;
+module.exports = router

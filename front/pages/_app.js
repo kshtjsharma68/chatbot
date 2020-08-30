@@ -43,25 +43,18 @@ Router.events.on("routeChangeError", () => {
 });
 
 export default class MyApp extends App {
-  componentDidMount() {
+  async componentDidMount() {
     let comment = document.createComment(`
 
 =========================================================
-* NextJS Material Kit v1.1.0 based on Material Kit Free - v2.0.2 (Bootstrap 4.0.0 Final Edition) and Material Kit React v1.8.0
+* Kshitij Sharma Nextjs
 =========================================================
-
-* Product Page: https://www.creative-tim.com/product/nextjs-material-kit
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/nextjs-material-kit/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 `);
     document.insertBefore(comment, document.documentElement);
+    let openRoutes = ["/login", "/register"];
+    if ( JSON.parse(localStorage.getItem("loggedIn")) && openRoutes.indexOf(window.location.pathname) > -1) {
+      Router.back();
+    }
   }
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {};
@@ -72,6 +65,7 @@ export default class MyApp extends App {
 
     return { pageProps };
   }
+
   render() {
     const { Component, pageProps } = this.props;
 

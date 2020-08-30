@@ -1,4 +1,4 @@
-import express from 'express';
+var express = require('express')
 // controllers
 import deleteController from '../controllers/delete.js';
 

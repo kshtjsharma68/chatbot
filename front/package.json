@@ -36,6 +36,7 @@
     "@material-ui/core": "4.9.13",
     "@material-ui/icons": "4.9.1",
     "@zeit/next-sass": "1.0.1",
+    "axios": "^0.20.0",
     "classnames": "2.2.6",
     "moment": "2.25.3",
     "next": "9.3.6",
@@ -51,6 +52,7 @@
     "react-dom": "16.13.1",
     "react-slick": "0.25.2",
     "react-swipeable-views": "0.13.9",
+    "socket.io-client": "^2.3.0",
     "styled-components": "5.1.0",
     "webpack": "4.43.0"
   }

@@ -23,52 +23,57 @@ import styles from "assets/jss/nextjs-material-kit/pages/loginPage.js";
 
 import image from "assets/img/bg7.jpg";
 
-import { API_LINK } from '../config.js';
-
 import { useRouter } from 'next/router';
 
-var axios = require('axios');
+import { API_LINK } from '../config.js';
+
+import axios from 'axios';
 
 const useStyles = makeStyles(styles);
 
 
-export default function LoginPage(props) {
+
+export default function RegisterPage(props) {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
-  const [ formInputs, setFormInputs ] = React.useState({email: "", password: ""});
+  const [ formInputs, setFormInputs ] = React.useState({name: "", email: "", password: ""});
   const router = useRouter();
   setTimeout(function() {
     setCardAnimation("");
   }, 700);
-  const classes = useStyles();
 
-  // React.useEffect(() => console.log('asdsadsad'))
+  // React.useEffect(() => {
+    
+  // }) 
 
-  const handleLoginForm = e => {
+
+  const formSubmit = e => {
     e.preventDefault();
-    axios.post(`${API_LINK}login`,formInputs)
-    .then(r => r.data)
-    .then(res => {
-      if (res.success) {
-        localStorage.setItem("loggedIn", true);
-        localStorage.setItem("user", JSON.stringify(res.user));
-        router.push('/chat');
+    axios.post(`${API_LINK}register`, formInputs)
+    .then(res => res.data)
+    .then(r => {
+      if (r.success && r.user._id) {
+        router.push('/login')
       }
-    }) 
-    .catch(e => {
-      console.log('errror', e)
     })
+    .catch(err => {
+      console.log(err)
+    })
+    // router.push('/login');
   }
 
+
+  const classes = useStyles();
   const { ...rest } = props;
+  // console.log(formInputs)
   return (
     <div>
-      <Header
+      {/* <Header
         absolute
         color="transparent"
         brand="NextJS Material Kit"
         rightLinks={<HeaderLinks />}
         {...rest}
-      />
+      /> */}
       <div
         className={classes.pageHeader}
         style={{
@@ -81,10 +86,10 @@ export default function LoginPage(props) {
           <GridContainer justify="center">
             <GridItem xs={12} sm={6} md={4}>
               <Card className={classes[cardAnimaton]}>
-                <form className={classes.form}  onSubmit={handleLoginForm}>
-                  <CardHeader color="primary" className={classes.cardHeader}>
-                    <h4>Login</h4>
-                    <div className={classes.socialLine}>
+                <form className={classes.form} onSubmit={formSubmit}>
+                  {/* <CardHeader color="primary" className={classes.cardHeader}> */}
+                    <h4>Registera</h4>
+                    {/* <div className={classes.socialLine}>
                       <Button
                         justIcon
                         href="#pablo"
@@ -112,10 +117,27 @@ export default function LoginPage(props) {
                       >
                         <i className={"fab fa-google-plus-g"} />
                       </Button>
-                    </div>
-                  </CardHeader>
+                    </div> */}
+                  {/* </CardHeader> */}
                   <p className={classes.divider}>Or Be Classical</p>
                   <CardBody>
+                    <CustomInput
+                      labelText="First Name..."
+                      id="first"
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      inputProps={{
+                        type: "text",
+                        name: "name",
+                        onChange: e => setFormInputs({...formInputs, [e.target.name]: e.target.value }),
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <People className={classes.inputIconsColor} />
+                          </InputAdornment>
+                        )
+                      }}
+                    />
                     <CustomInput
                       labelText="Email..."
                       id="email"
@@ -160,7 +182,6 @@ export default function LoginPage(props) {
                     </Button>
                   </CardFooter>
                 </form>
-                <a href="/register"> Register </a>
               </Card>
             </GridItem>
           </GridContainer>
